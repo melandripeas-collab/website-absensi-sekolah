@@ -687,7 +687,6 @@
                             <th>Status Kehadiran</th>
                             <th>Tanggal</th>
                             <th>Keterangan</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
 
