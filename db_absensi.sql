@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 10 Agu 2026 pada 06.52
+-- Waktu pembuatan: 11 Agu 2026 pada 05.05
 -- Versi server: 8.0.17
 -- Versi PHP: 7.3.10
 
@@ -44,6 +44,7 @@ CREATE TABLE `tb_absensi` (
 
 CREATE TABLE `tb_siswa` (
   `id_siswa` int(11) NOT NULL,
+  `nis` int(50) NOT NULL,
   `nama_siswa` varchar(100) NOT NULL,
   `kelas` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
