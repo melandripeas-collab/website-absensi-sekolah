@@ -1,3 +1,40 @@
+<?php
+require_once __DIR__ . '/../../config/Database.php';
+
+$db = (new Database())->getConnection();
+$students = [];
+$attendance = [];
+$dbError = null;
+
+$statusMeta = [
+    'Hadir' => ['class' => 'status-hadir', 'icon' => 'bi-check-circle-fill'],
+    'Izin' => ['class' => 'status-izin', 'icon' => 'bi-person-fill'],
+    'Sakit' => ['class' => 'status-sakit', 'icon' => 'bi-briefcase-medical'],
+    'Alpa' => ['class' => 'status-alpa', 'icon' => 'bi-x-circle-fill'],
+];
+
+try {
+    $stmt = $db->prepare("SELECT id_siswa, nis, nama_siswa FROM tb_siswa ORDER BY nama_siswa ASC");
+    $stmt->execute();
+    $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt = $db->prepare(
+        "SELECT a.id_absensi, a.id_siswa, s.nis, s.nama_siswa, a.tanggal, a.status_kehadiran, a.keterangan
+         FROM tb_absensi a
+         JOIN tb_siswa s ON a.id_siswa = s.id_siswa
+         ORDER BY a.tanggal DESC, a.id_absensi DESC"
+    );
+    $stmt->execute();
+    $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $dbError = $e->getMessage();
+}
+
+function formatDateIndo($date)
+{
+    return date('d-m-Y', strtotime($date));
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -590,13 +627,13 @@
                             Pilih Siswa
                         </label>
 
-                        <select class="form-select">
-                            <option>-- Pilih Siswa --</option>
-                            <option>Andi Pratama</option>
-                            <option>Budi Santoso</option>
-                            <option>Citra Lestari</option>
-                            <option>Deni Saputra</option>
-                            <option>Eka Nuraini</option>
+                        <select class="form-select" id="siswaSelect">
+                            <option value="">-- Pilih Siswa --</option>
+                            <?php foreach ($students as $student): ?>
+                                <option value="<?= $student['id_siswa'] ?>">
+                                    <?= htmlspecialchars($student['nis'] . ' - ' . $student['nama_siswa']) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -693,146 +730,49 @@
                     </thead>
 
                     <tbody>
-
                         <tr>
                             <td>1</td>
-
                             <td>Andi Pratama</td>
-
                             <td>
                                 <span class="status status-hadir">
-                                    <i class="bi bi-check-circle-fill"></i>
-                                    Hadir
-                                </span>
-                            </td>
-
-                            <td>06-08-2026</td>
-
-                            <td>-</td>
-
-                            <td>
-                                <button class="action-btn edit">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>2</td>
-
-                            <td>Budi Santoso</td>
-
-                            <td>
-                                <span class="status status-izin">
-                                    <i class="bi bi-person-fill"></i>
-                                    Izin
-                                </span>
-                            </td>
-
-                            <td>06-08-2026</td>
-
-                            <td>Acara keluarga</td>
-
-                            <td>
-                                <button class="action-btn edit">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>3</td>
-
-                            <td>Citra Lestari</td>
-
-                            <td>
-                                <span class="status status-sakit">
-                                    <i class="bi bi-briefcase-medical"></i>
-                                    Sakit
-                                </span>
-                            </td>
-
-                            <td>06-08-2026</td>
-
-                            <td>Demam</td>
-
-                            <td>
-                                <button class="action-btn edit">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>4</td>
-
-                            <td>Deni Saputra</td>
-
-                            <td>
-                                <span class="status status-alpa">
-                                    <i class="bi bi-x-circle-fill"></i>
-                                    Alpa
-                                </span>
-                            </td>
-
-                            <td>06-08-2026</td>
-
-                            <td>-</td>
-
-                            <td>
-                                <button class="action-btn edit">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>5</td>
-
-                            <td>Eka Nuraini</td>
-
-                            <td>
-                                <span class="status status-hadir">
-                                    <i class="bi bi-check-circle-fill"></i>
-                                    Hadir
-                                </span>
-                            </td>
-
-                            <td>06-08-2026</td>
-
-                            <td>Mengikuti pelajaran</td>
-
-                            <td>
-                                <button class="action-btn edit">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
-
+                                    <i class="bibi-check-circle-fill"></i>
+                                    hadir
+                            </span> 
+                        </td>
+                        <?php if (!empty($attendance)): ?>
+                            <?php foreach ($attendance as $index => $row): ?>
+                                <?php
+                                    $status = $row['status_kehadiran'];
+                                    $meta = $statusMeta[$status] ?? ['class' => 'status-alpa', 'icon' => 'bi-x-circle-fill'];
+                                    $keterangan = trim($row['keterangan']) !== '' ? htmlspecialchars($row['keterangan']) : '-';
+                                ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= htmlspecialchars($row['nis']) ?></td>
+                                    <td><?= htmlspecialchars($row['nama_siswa']) ?></td>
+                                    <td><?= formatDateIndo($row['tanggal']) ?></td>
+                                    <td>
+                                        <span class="status <?= $meta['class'] ?>">
+                                            <i class="bi <?= $meta['icon'] ?>"></i>
+                                            <?= htmlspecialchars($status) ?>
+                                        </span>
+                                    </td>
+                                    <td><?= $keterangan ?></td>
+                                    <td>
+                                        <button class="action-btn edit">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </button>
+                                        <button class="action-btn delete">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="7">Tidak ada data absensi.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
 
                 </table>
@@ -844,7 +784,7 @@
             <div class="table-footer">
 
                 <span>
-                    Menampilkan 1 - 5 dari 5 data
+                    Menampilkan 1 - <?= count($attendance) ?> dari <?= count($attendance) ?> data
                 </span>
 
                 <div class="pagination-custom">
