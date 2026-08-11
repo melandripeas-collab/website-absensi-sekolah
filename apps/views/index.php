@@ -683,9 +683,10 @@
                     <thead>
                         <tr>
                             <th style="width:70px;">No</th>
+                            <th>NIS</th>
                             <th>Nama Siswa</th>
-                            <th>Status Kehadiran</th>
                             <th>Tanggal</th>
+                            <th>Status Kehadiran</th>
                             <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
