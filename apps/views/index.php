@@ -730,6 +730,15 @@ function formatDateIndo($date)
                     </thead>
 
                     <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Andi Pratama</td>
+                            <td>
+                                <span class="status status-hadir">
+                                    <i class="bibi-check-circle-fill"></i>
+                                    hadir
+                            </span> 
+                        </td>
                         <?php if (!empty($attendance)): ?>
                             <?php foreach ($attendance as $index => $row): ?>
                                 <?php
