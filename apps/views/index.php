@@ -732,47 +732,25 @@ function formatDateIndo($date)
                     <tbody>
                         <tr>
                             <td>1</td>
+                            <td>262701012008</td>
                             <td>Andi Pratama</td>
+                            <td>2026-08-06</td>  
                             <td>
                                 <span class="status status-hadir">
                                     <i class="bibi-check-circle-fill"></i>
                                     hadir
-                            </span> 
-                        </td>
-                        <?php if (!empty($attendance)): ?>
-                            <?php foreach ($attendance as $index => $row): ?>
-                                <?php
-                                    $status = $row['status_kehadiran'];
-                                    $meta = $statusMeta[$status] ?? ['class' => 'status-alpa', 'icon' => 'bi-x-circle-fill'];
-                                    $keterangan = trim($row['keterangan']) !== '' ? htmlspecialchars($row['keterangan']) : '-';
-                                ?>
-                                <tr>
-                                    <td><?= $index + 1 ?></td>
-                                    <td><?= htmlspecialchars($row['nis']) ?></td>
-                                    <td><?= htmlspecialchars($row['nama_siswa']) ?></td>
-                                    <td><?= formatDateIndo($row['tanggal']) ?></td>
-                                    <td>
-                                        <span class="status <?= $meta['class'] ?>">
-                                            <i class="bi <?= $meta['icon'] ?>"></i>
-                                            <?= htmlspecialchars($status) ?>
-                                        </span>
-                                    </td>
-                                    <td><?= $keterangan ?></td>
-                                    <td>
-                                        <button class="action-btn edit">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </button>
-                                        <button class="action-btn delete">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="7">Tidak ada data absensi.</td>
-                            </tr>
-                        <?php endif; ?>
+                                </span> 
+                            </td>
+                            <td> - </td>
+                            <td>
+                                <button class="action-btn edit">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                                <button class="action-btn delete">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
