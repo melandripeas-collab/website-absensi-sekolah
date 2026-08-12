@@ -6,7 +6,7 @@
                 <span>Form Absensi</span>
             </div>
 
-            <form>
+            <form id="attendanceForm">
 
                 <div class="form-grid">
 
@@ -15,13 +15,8 @@
                             Pilih Siswa
                         </label>
 
-                        <select class="form-select" id="siswaSelect">
+                        <select class="form-select" id="siswaSelect" name="id_siswa">
                             <option value="">-- Pilih Siswa --</option>
-                            <?php foreach ($students as $student): ?>
-                                <option value="<?= $student['id_siswa'] ?>">
-                                    <?= htmlspecialchars($student['nis'] . ' - ' . $student['nama_siswa']) ?>
-                                </option>
-                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -31,12 +26,12 @@
                             Status Kehadiran
                         </label>
 
-                        <select class="form-select">
-                            <option>-- Pilih Status --</option>
-                            <option>Hadir</option>
-                            <option>Izin</option>
-                            <option>Sakit</option>
-                            <option>Alpa</option>
+                        <select class="form-select" id="statusSelect" name="status_kehadiran">
+                            <option value="">-- Pilih Status --</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Izin">Izin</option>
+                            <option value="Sakit">Sakit</option>
+                            <option value="Alpa">Alpa</option>
                         </select>
                     </div>
 
@@ -49,7 +44,9 @@
                         <input
                             type="date"
                             class="form-control"
-                            value="2026-08-06">
+                            id="tanggalInput"
+                            name="tanggal"
+                            value="<?php echo date('Y-m-d'); ?>">
                     </div>
 
 
@@ -60,6 +57,8 @@
 
                         <textarea
                             class="form-control"
+                            name="keterangan"
+                            id="keteranganInput"
                             placeholder="Masukkan keterangan (opsional)"
                         ></textarea>
                     </div>
@@ -88,12 +87,7 @@
                 </div>
 
                 <div class="search-box">
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Cari siswa..."
-                        id="searchInput">
-
+                    <input id="searchInput" class="form-control" placeholder="Cari..." />
                     <i class="bi bi-search"></i>
                 </div>
 
@@ -117,47 +111,11 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>262701012008</td>
-                            <td>Andi Pratama</td>
-                            <td>2026-08-06</td>  
-                            <td>
-                                <span class="status status-hadir">
-                                    <i class="bibi-check-circle-fill"></i>
-                                    hadir
-                                </span> 
-                            </td>
-                            <td> - </td>
-                            <td>
-                                <button class="action-btn edit">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-                                <button class="action-btn delete">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
+                    <tbody id="attendanceTbody">
+                        <!-- Rows will be populated dynamically via JS -->
                     </tbody>
 
                 </table>
-
-            </div>
-
-
-            <!-- TABLE FOOTER -->
-            <div class="table-footer">
-
-                <span>
-                    Menampilkan 1 - <?= count($attendance) ?> dari <?= count($attendance) ?> data
-                </span>
-
-                <div class="pagination-custom">
-                    <button>«</button>
-                    <button class="active">1</button>
-                    <button>»</button>
-                </div>
 
             </div>
 

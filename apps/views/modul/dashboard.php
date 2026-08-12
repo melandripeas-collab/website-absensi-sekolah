@@ -481,12 +481,12 @@
 
     <nav class="menu">
 
-        <a href="#" class="menu-item">
+        <a href="?page=siswa" class="menu-item">
             <i class="bi bi-person"></i>
             <span>Data Siswa</span>
         </a>
 
-        <a href="#" class="menu-item">
+        <a href="?page=absensi" class="menu-item">
             <i class="bi bi-calendar-check"></i>
             <span>Absensi</span>
         </a>
@@ -509,11 +509,6 @@
 
         <div class="top-right">
 
-            <div class="date">
-                <i class="bi bi-calendar3"></i>
-                <span>Selasa, 6 Agustus 2026</span>
-            </div>
-
             <div class="admin">
                 <div class="avatar">
                     <i class="bi bi-person-fill"></i>
@@ -531,56 +526,9 @@
 
 <!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
+<?php // include shared JS (populates absensi & siswa views, handles API calls) ?>
 <script>
-    // Search siswa
-    const searchInput = document.getElementById("searchInput");
-    const table = document.getElementById("attendanceTable");
-
-    searchInput.addEventListener("keyup", function () {
-
-        const keyword = this.value.toLowerCase();
-        const rows = table.querySelectorAll("tbody tr");
-
-        rows.forEach(row => {
-
-            const text = row.innerText.toLowerCase();
-
-            row.style.display =
-                text.includes(keyword) ? "" : "none";
-
-        });
-
-    });
-
-
-    // Tombol delete
-    document.querySelectorAll(".delete").forEach(button => {
-
-        button.addEventListener("click", function () {
-
-            const row = this.closest("tr");
-
-            if (confirm("Apakah kamu yakin ingin menghapus data ini?")) {
-                row.remove();
-            }
-
-        });
-
-    });
-
-
-    // Tombol edit
-    document.querySelectorAll(".edit").forEach(button => {
-
-        button.addEventListener("click", function () {
-
-            alert("Fitur edit absensi dapat dihubungkan dengan modal/form edit.");
-
-        });
-
-    });
+<?php include __DIR__ . '/../js/root.php'; ?>
 </script>
 
 </body>
