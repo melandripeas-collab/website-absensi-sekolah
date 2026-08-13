@@ -336,18 +336,4 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 	});
-
-	const searchInput = document.getElementById('searchInput');
-	if (searchInput) {
-		searchInput.addEventListener('keyup', function () {
-			const keyword = this.value.toLowerCase();
-			const table = document.getElementById('attendanceTable');
-			if (!table) return;
-			const rows = table.querySelectorAll('tbody tr');
-			rows.forEach(row => {
-				const text = row.innerText.toLowerCase();
-				row.style.display = text.includes(keyword) ? '' : 'none';
-			});
-		});
-	}
 });
