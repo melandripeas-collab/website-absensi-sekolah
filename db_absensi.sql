@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 13 Agu 2026 pada 00.42
+-- Waktu pembuatan: 13 Agu 2026 pada 06.42
 -- Versi server: 8.0.17
 -- Versi PHP: 7.3.10
 
@@ -36,6 +36,18 @@ CREATE TABLE `tb_absensi` (
   `keterangan` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data untuk tabel `tb_absensi`
+--
+
+INSERT INTO `tb_absensi` (`id_absensi`, `id_siswa`, `status_kehadiran`, `tanggal`, `keterangan`) VALUES
+(1, 6, 'Sakit', '2026-08-13', 'Batuk dan Demam'),
+(2, 7, 'Izin', '2026-08-13', 'Ke Jakarta'),
+(3, 8, 'Hadir', '2026-08-13', '-'),
+(4, 9, 'Hadir', '2026-08-13', '-'),
+(5, 10, 'Hadir', '2026-08-13', '-'),
+(6, 11, 'Hadir', '2026-08-13', '-');
+
 -- --------------------------------------------------------
 
 --
@@ -54,9 +66,12 @@ CREATE TABLE `tb_siswa` (
 --
 
 INSERT INTO `tb_siswa` (`id_siswa`, `nis`, `nama_siswa`, `kelas`) VALUES
-(2, '2147483647', 'Sahrul Fajri Ramadan Ahmad', 'XII-PPLG'),
-(3, '2147483647', 'Melaundri Prasucipto', 'XII-PPLG'),
-(5, '262708090822', 'Melaundri Prasucipto', 'XII-PPLG');
+(6, '26270809082', 'Sahrul Fajri Ramadan Ahmad', 'XII-PPLG'),
+(7, '26272303081', 'Melandri Prasetio', 'XII-PPLG'),
+(8, '26271409083', 'Siti Kholisah', 'XII-PPLG'),
+(9, '26272901094', 'Sisca Tiara Putri', 'XII-PPLG'),
+(10, '26272704075', 'Hilkrom Ahmada', 'XII-PPLG'),
+(11, '26270503096', 'Arin Maulida', 'XII-PPLG');
 
 --
 -- Indexes for dumped tables
@@ -83,13 +98,13 @@ ALTER TABLE `tb_siswa`
 -- AUTO_INCREMENT untuk tabel `tb_absensi`
 --
 ALTER TABLE `tb_absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
