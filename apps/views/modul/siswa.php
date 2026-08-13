@@ -58,6 +58,38 @@
 
 </section>
 
+<div class="modal fade" id="studentEditModal" tabindex="-1" aria-hidden="true" style="display:none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form id="studentEditForm">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit Data Siswa</h5>
+					<button type="button" class="btn-close" id="closeStudentEditModal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="editIdInput" />
+					<div class="mb-3">
+						<label class="form-label">NIS</label>
+						<input class="form-control" id="editNisInput" required />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Nama Siswa</label>
+						<input class="form-control" id="editNamaInput" required />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Kelas</label>
+						<input class="form-control" id="editKelasInput" required />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="cancelStudentEditModal">Batal</button>
+					<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <?php // include shared JS for dynamic behavior ?>
 <script>
 <?php include __DIR__ . '/../js/root.php'; ?>

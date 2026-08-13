@@ -16,11 +16,11 @@ class ControllerUtama {
 
     public function getAllSiswa() {
         $stmt = $this->siswa->read();
-        $num = $stmt->rowCount();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($num > 0) {
+        if (count($rows) > 0) {
             $siswa_arr = array("status" => "success", "data" => array());
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($rows as $row) {
                 $siswa_item = array(
                     "id_siswa" => $row["id_siswa"],
                     "nis" => $row["nis"],
@@ -110,11 +110,11 @@ class ControllerUtama {
 
     public function getAllAbsensi() {
         $stmt = $this->absensi->read();
-        $num = $stmt->rowCount();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($num > 0) {
+        if (count($rows) > 0) {
             $absensi_arr = array("status" => "success", "data" => array());
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($rows as $row) {
                 $absensi_item = array(
                     "id_absensi" => $row["id_absensi"],
                     "id_siswa" => $row["id_siswa"],

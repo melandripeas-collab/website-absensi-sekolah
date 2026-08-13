@@ -504,7 +504,7 @@
 
         <div class="top-left">
             <i class="bi bi-list hamburger"></i>
-            <span class="page-title">Absensi Sekolah</span>
+            <span class="page-title">Absensi Siswa</span>
         </div>
 
         <div class="top-right">

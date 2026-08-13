@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 11 Agu 2026 pada 05.05
+-- Waktu pembuatan: 13 Agu 2026 pada 00.42
 -- Versi server: 8.0.17
 -- Versi PHP: 7.3.10
 
@@ -44,10 +44,19 @@ CREATE TABLE `tb_absensi` (
 
 CREATE TABLE `tb_siswa` (
   `id_siswa` int(11) NOT NULL,
-  `nis` int(50) NOT NULL,
+  `nis` varchar(50) NOT NULL,
   `nama_siswa` varchar(100) NOT NULL,
   `kelas` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data untuk tabel `tb_siswa`
+--
+
+INSERT INTO `tb_siswa` (`id_siswa`, `nis`, `nama_siswa`, `kelas`) VALUES
+(2, '2147483647', 'Sahrul Fajri Ramadan Ahmad', 'XII-PPLG'),
+(3, '2147483647', 'Melaundri Prasucipto', 'XII-PPLG'),
+(5, '262708090822', 'Melaundri Prasucipto', 'XII-PPLG');
 
 --
 -- Indexes for dumped tables
@@ -80,7 +89,7 @@ ALTER TABLE `tb_absensi`
 -- AUTO_INCREMENT untuk tabel `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
